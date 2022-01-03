@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { Header } from '../Header/Header';
+
 import clsx from 'clsx';
 
 // import { connect } from 'react-redux';
@@ -8,15 +10,14 @@ import clsx from 'clsx';
 
 import styles from './MainLayout.module.scss';
 
-const Component = ({className, children}) => (
+const Component = ({className}) => (
   <div className={clsx(className, styles.root)}>
     <h2>MainLayout</h2>
-    {children}
+    <Header />
   </div>
 );
 
 Component.propTypes = {
-  children: PropTypes.node,
   className: PropTypes.string,
 };
 
