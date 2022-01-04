@@ -51,8 +51,8 @@ const Component = ({className, post, users}) => (
             </Typography>
           </CardContent>
           <CardActions>
-            {users.logged === true && users.email === post.email || users.type === 'admin' ?
-              <Button component={Link} size="small" color="primary" href={`post/${post.id}/edit`}>Edit</Button>
+            {users.logged === true && users.email === post.email ?
+              <Button component={Link} size="small" color="primary" href={`${post.id}/edit`}>Edit</Button>
               :
               <></>
             }

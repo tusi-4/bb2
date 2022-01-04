@@ -48,7 +48,7 @@ export const initialState = {
   },
   users: {
     email: 'johndoe@example.com',
-    type: 'admin',
+    type: 'user',
     logged: true,
   },
 };
