@@ -1,14 +1,10 @@
 export const initialState = {
   posts: {
-    data: {},
-    loading: {
-      active: false,
-      error: false,
-    },
-    post: [
+    data: [
       {
         id: '1',
         title: 'Lorem ipsum',
+        text: 'A bb ccc dddd eeeee ffffff ggggggg hhhhhhhh.',
         pubDate: '2021-12-13',
         upDate: '2021-12-27',
         email: 'johndoe@example.com',
@@ -21,8 +17,9 @@ export const initialState = {
       {
         id: '2',
         title: 'Ipsum Lorem',
+        text: 'A bb ccc dddd eeeee ffffff ggggggg hhhhhhhh.',
         pubDate: '2021-12-19',
-        upDate: null,
+        upDate: '2021-12-31',
         email: 'janedoe@example.com',
         status: 'published',
         image: 'https://images.pexels.com/photos/5721814/pexels-photo-5721814.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
@@ -33,8 +30,9 @@ export const initialState = {
       {
         id: '3',
         title: 'Lorem lorem',
+        text: 'A bb ccc dddd eeeee ffffff ggggggg hhhhhhhh.',
         pubDate: '2022-01-02',
-        upDate: null,
+        upDate: '2022-01-03',
         email: 'janedoe@example.com',
         status: 'published',
         image: 'https://images.pexels.com/photos/5721812/pexels-photo-5721812.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
@@ -43,6 +41,10 @@ export const initialState = {
         location: 'Boston',
       },
     ],
+    loading: {
+      active: false,
+      error: false,
+    },
   },
   users: {
     email: 'johndoe@example.com',
