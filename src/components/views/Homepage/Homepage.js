@@ -41,7 +41,7 @@ const Component = ({className, users, posts}) => (
             </Typography>
           </CardContent>
           <CardActions>
-            <Button component={Link} size="small" href="post/:id">Learn More</Button>
+            <Button component={Link} color="primary" size="small" href={`post/${post.id}`}>Learn More</Button>
           </CardActions>
         </Card>
       ))}

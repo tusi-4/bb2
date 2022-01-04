@@ -9,7 +9,7 @@ export const initialState = {
         upDate: '2021-12-27',
         email: 'johndoe@example.com',
         status: 'closed',
-        image: 'https://images.pexels.com/photos/5721879/pexels-photo-5721879.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+        image: 'https://images.pexels.com/photos/5721812/pexels-photo-5721812.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
         price: '199$',
         phone: '123-456-789',
         location: 'London',
@@ -35,7 +35,7 @@ export const initialState = {
         upDate: '2022-01-03',
         email: 'janedoe@example.com',
         status: 'published',
-        image: 'https://images.pexels.com/photos/5721812/pexels-photo-5721812.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+        image: 'https://images.pexels.com/photos/5721879/pexels-photo-5721879.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
         price: '169$',
         phone: '456-789-012',
         location: 'Boston',
@@ -48,7 +48,7 @@ export const initialState = {
   },
   users: {
     email: 'johndoe@example.com',
-    type: 'user',
+    type: 'admin',
     logged: true,
   },
 };
