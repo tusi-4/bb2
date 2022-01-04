@@ -3,20 +3,28 @@ import PropTypes from 'prop-types';
 
 import clsx from 'clsx';
 
+import styles from './NotFound.module.scss';
+
+import { Box } from '@material-ui/core';
+import { Link } from '@material-ui/core';
+
 // import { connect } from 'react-redux';
 // import { reduxSelector, reduxActionCreator } from '../../../redux/exampleRedux.js';
 
-import styles from './NotFound.module.scss';
 
-const Component = ({className, children}) => (
+const Component = ({className}) => (
   <div className={clsx(className, styles.root)}>
-    <h2>NotFound</h2>
-    {children}
+    <Box className={clsx(className, styles.box)}>
+      <h2>NotFound</h2>
+      <p>
+        Please returnt to
+        <Link color="primary" variant="button" href="/"> Homepage</Link>
+      </p>
+    </Box>
   </div>
 );
 
 Component.propTypes = {
-  children: PropTypes.node,
   className: PropTypes.string,
 };
 

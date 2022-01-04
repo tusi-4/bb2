@@ -1,4 +1,15 @@
 @import '../../../styles/settings.scss';
 
-// .root {
-// }
+.root {
+  padding: $base-size;
+  display: flex;
+  justify-content: center;
+}
+
+.box {
+  width: 75%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: wrap;
+}
