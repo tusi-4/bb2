@@ -23,9 +23,9 @@ export const fetchOne = payload => ({ payload, type: FETCH_ONE });
 export const addPost = payload => ({ payload, type: ADD_POST });
 
 /* thunk creators */
-export const addPostRequest = (post) => {
-// i tu mnie przywiodło kopiowanie z OrderTicketForm i utknęłam, ale potrzebuję tego do śmigalności dodawaia postu ojezus
-};
+// export const addPostRequest = (post) => {
+// // i tu mnie przywiodło kopiowanie z OrderTicketForm i utknęłam, ale potrzebuję tego do śmigalności dodawaia postu ojezus
+// };
 
 /* reducer */
 export const reducer = (statePart = [], action = {}) => {

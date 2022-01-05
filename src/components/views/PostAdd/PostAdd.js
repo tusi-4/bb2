@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ImageUploader from 'react-images-upload';
 
 import clsx from 'clsx';
 
@@ -11,7 +12,7 @@ import { Button } from '@material-ui/core';
 
 import { connect } from 'react-redux';
 import { getAllUsers } from '../../../redux/usersRedux.js';
-import { addPostRequest } from '../../../redux/postsRedux.js';
+//import { addPostRequest } from '../../../redux/postsRedux.js';
 
 import { NotFound } from '../NotFound/NotFound';
 
@@ -42,12 +43,12 @@ class Component extends React.Component {
 
   submitForm = async (e) => {
     const { post } = this.state;
-    const { addPost } = this.props;
+    //const { addPost } = this.props;
 
     e.preventDefault();
 
     if(post.title.length > 10 && post.text.length > 20 && post.email.includes('@')){
-      await addPost(post);
+      // await addPost(post);
       this.setState({
         post: {
           title: '',
@@ -107,15 +108,15 @@ class Component extends React.Component {
                 name="email"
                 onChange={updateTextField}
               />
-              <input
-                label="Image"
-                value={post.image}
-                name="image"
-                onChange={updateTextField}
-                className={clsx(className, styles.picput)}
-              >
-              </input>
-              <Button className={clsx(className, styles.btn)} color="primary" variant="contained">I act like I upload pictures</Button>
+              <ImageUploader
+                withIcon={true}
+                buttonText='Choose image'
+                imgExtension={['.jpg', '.gif', '.png', '.gif']}
+                maxFileSize={5242880}
+                withPreview={true}
+                //onChange={setPhoto}
+                singleImage={true}
+              />
               <TextField 
                 id="standard"
                 label="Price"
@@ -157,18 +158,18 @@ class Component extends React.Component {
 Component.propTypes = {
   className: PropTypes.string,
   users: PropTypes.object,
-  addPost: PropTypes.func,
+  //addPost: PropTypes.func,
 };
 
 const mapStateToProps = state => ({
   users: getAllUsers(state),
 });
 
-const mapDispatchToProps = dispatch => ({
-  addPost: (post) => dispatch(addPostRequest(post)),
-});
+// const mapDispatchToProps = dispatch => ({
+//   addPost: (post) => dispatch(addPostRequest(post)),
+// });
 
-const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
+const Container = connect(mapStateToProps/*, mapDispatchToProps*/)(Component);
 
 export {
   // Component as PostAdd,

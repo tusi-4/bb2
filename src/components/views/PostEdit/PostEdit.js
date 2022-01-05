@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ImageUploader from 'react-images-upload';
 
 import clsx from 'clsx';
 
@@ -47,7 +48,15 @@ const Component = ({className, post, users}) => (
             margin="normal"
             value={post.email}
           />
-          <span>dodawacz zdjęcia</span>
+          <ImageUploader
+            withIcon={true}
+            buttonText='Choose image'
+            imgExtension={['.jpg', '.gif', '.png', '.gif']}
+            maxFileSize={5242880}
+            withPreview={true}
+            //onChange={setPhoto}
+            singleImage={true}
+          />
           <TextField 
             id="standard"
             label="Price"
