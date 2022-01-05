@@ -47,7 +47,7 @@ class Component extends React.Component {
 
     e.preventDefault();
 
-    if(post.title.length > 10 && post.text.length > 20 && post.email.includes('@')){
+    if(post.title.length > 10 && post.text.length > 20 && post.author.includes('@')){
       await addPost(post);
       this.setState({
         post: {
@@ -69,7 +69,7 @@ class Component extends React.Component {
   render() {
     const { updateTextField, submitForm } = this;
     const { className, users } = this.props;
-    const { post } = this.state;
+    const { post } = this.state; // wiem, ze jest nieuzywany, ale jak go uzywam to !!*!@#*) dziala
 
     return (
       <div className={clsx(className, styles.root)}>
@@ -82,7 +82,7 @@ class Component extends React.Component {
                 label="Title"
                 variant="filled"
                 margin="normal"
-                value={post.title}
+                //value={post.title}
                 name="title"
                 onChange={updateTextField}
               />
@@ -94,7 +94,7 @@ class Component extends React.Component {
                 rows={5}
                 variant="filled"
                 margin="normal"
-                value={post.text}
+                //value={post.text}
                 name="text"
                 onChange={updateTextField}
               />
@@ -104,7 +104,7 @@ class Component extends React.Component {
                 label="Author"
                 variant="filled"
                 margin="normal"
-                value={post.author}
+                //value={post.author}
                 name="author"
                 onChange={updateTextField}
               />
@@ -122,7 +122,7 @@ class Component extends React.Component {
                 label="Price"
                 variant="filled"
                 margin="normal"
-                value={post.price}
+                //value={post.price}
                 name="price"
                 onChange={updateTextField}
               />
@@ -131,7 +131,7 @@ class Component extends React.Component {
                 label="Phone number"
                 variant="filled"
                 margin="normal"
-                value={post.phone}
+                //value={post.phone}
                 name="phone"
                 onChange={updateTextField}
               />
@@ -140,7 +140,7 @@ class Component extends React.Component {
                 label="Location"
                 variant="filled"
                 margin="normal"
-                value={post.location}
+                //value={post.location}
                 name="location"
                 onChange={updateTextField}
               />
