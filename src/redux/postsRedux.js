@@ -1,3 +1,5 @@
+import Axios from 'axios';
+
 /* selectors */
 export const getAll = ({posts}) => posts.data;
 export const getOne = ({posts}, id) => posts.data.find(post => post.id === id );
@@ -23,9 +25,38 @@ export const fetchOne = payload => ({ payload, type: FETCH_ONE });
 export const addPost = payload => ({ payload, type: ADD_POST });
 
 /* thunk creators */
-// export const addPostRequest = (post) => {
-// // i tu mnie przywiodło kopiowanie z OrderTicketForm i utknęłam, ale potrzebuję tego do śmigalności dodawaia postu ojezus
-// };
+export const fetchPublished = () => {
+  return (dispatch, getState) => {
+    const{ posts } = getState();
+    if(posts.data.length === 0 && posts.loading.active === false){
+      dispatch(fetchStarted());
+
+      Axios
+        .get('http://localhost:8000/api/posts')
+        .then(res => {
+          dispatch(fetchSuccess(res.data));
+        })
+        .catch(err => {
+          dispatch(fetchError(err.message || true));
+        });
+    }
+  };
+};
+
+export const fetchById = (id) => {
+  return (dispatch, getState) => {
+    dispatch(fetchStarted());
+
+    Axios
+      .get(`http://localhost:8000/api/posts/${id}`)
+      .then(res => {
+        dispatch(fetchSuccess(res.data));
+      })
+      .catch(err => {
+        dispatch(fetchError(err.message || true));
+      });
+  };
+};
 
 /* reducer */
 export const reducer = (statePart = [], action = {}) => {

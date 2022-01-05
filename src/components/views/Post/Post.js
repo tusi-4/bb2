@@ -16,55 +16,60 @@ import { Link } from '@material-ui/core';
 
 import { connect } from 'react-redux';
 import { getAllUsers } from '../../../redux/usersRedux.js';
-import { getOne } from '../../../redux/postsRedux.js';
+import { getOne, fetchById } from '../../../redux/postsRedux.js';
 
 
 
-const Component = ({className, post, users}) => (
-  <div className={clsx(className, styles.root)}>
-    <Box className={clsx(className, styles.box)}>
-      <Card key={post.id} sx={{ maxWidth: 345 }}>
-        {post.image && 
-          <CardMedia
-            component="img"
-            height="250"
-            image={post.image}
-          />
-        }
-        <CardContent>
-          <Typography variant="h5" gutterBottom>
-            {post.title}
-          </Typography>
-          <Typography variant="body1" gutterBottom>
-            {post.text}
-          </Typography>
-          <Typography variant="body2" gutterBottom>
-            {post.price && `Price: ${post.price}`}
-          </Typography>
-          <Typography variant="body2" gutterBottom>
-            Contact: {post.email} {post.phone && ` | ${post.phone}`}<br />
-            {post.location && `Location: ${post.location}`}
-          </Typography>
-          <Typography variant="caption">
-            Added: {post.pubDate} {post.upDate && ` | ${post.upDate}`}
-          </Typography>
-        </CardContent>
-        <CardActions>
-          {users.logged === true && users.email === post.email || users.type === 'admin' ?
-            <Button component={Link} size="small" color="primary" href={`${post.id}/edit`}>Edit</Button>
-            :
-            <></>
+const Component = ({className, post, users, fetchOnePost}) => {
+  fetchOnePost();
+  
+  return (
+    <div className={clsx(className, styles.root)}>
+      <Box className={clsx(className, styles.box)}>
+        <Card key={post.id} sx={{ maxWidth: 345 }}>
+          {post.image && 
+            <CardMedia
+              component="img"
+              height="250"
+              image={post.image}
+            />
           }
-        </CardActions>
-      </Card>
-    </Box>
-  </div>
-);
+          <CardContent>
+            <Typography variant="h5" gutterBottom>
+              {post.title}
+            </Typography>
+            <Typography variant="body1" gutterBottom>
+              {post.text}
+            </Typography>
+            <Typography variant="body2" gutterBottom>
+              {post.price && `Price: ${post.price}`}
+            </Typography>
+            <Typography variant="body2" gutterBottom>
+              Contact: {post.email} {post.phone && ` | ${post.phone}`}<br />
+              {post.location && `Location: ${post.location}`}
+            </Typography>
+            <Typography variant="caption">
+              Added: {post.pubDate} {post.upDate && ` | ${post.upDate}`}
+            </Typography>
+          </CardContent>
+          <CardActions>
+            {users.logged === true && users.email === post.email || users.type === 'admin' ?
+              <Button component={Link} size="small" color="primary" href={`${post.id}/edit`}>Edit</Button>
+              :
+              <></>
+            }
+          </CardActions>
+        </Card>
+      </Box>
+    </div>
+  );
+};
 
 Component.propTypes = {
   className: PropTypes.string,
   users: PropTypes.object,
   post: PropTypes.object,
+  fetchOnePost: PropTypes.func,
 };
 
 const mapStateToProps = (state, props) => {
@@ -76,11 +81,11 @@ const mapStateToProps = (state, props) => {
   });
 };
 
-// const mapDispatchToProps = dispatch => ({
-//   someAction: arg => dispatch(reduxActionCreator(arg)),
-// });
+const mapDispatchToProps = (dispatch, props) => ({
+  fetchOnePost: () => dispatch(fetchById(props.match.params.id)),
+});
 
-const Container = connect(mapStateToProps)(Component);
+const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
 
 export {
   //Component as Post,
