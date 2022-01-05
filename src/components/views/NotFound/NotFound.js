@@ -17,8 +17,8 @@ const Component = ({className}) => (
     <Box className={clsx(className, styles.box)}>
       <h2>NotFound</h2>
       <p>
-        Please returnt to
-        <Link color="primary" variant="button" href="/"> Homepage</Link>
+        Please return to&nbsp;
+        <Link color="primary" variant="button" href="/">Homepage</Link>
       </p>
     </Box>
   </div>

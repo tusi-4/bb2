@@ -20,61 +20,57 @@ const Component = ({className, post, users}) => (
   <div className={clsx(className, styles.root)}>
     <Box className={clsx(className, styles.box)}>
       {users.logged && users.email === post.email ?
-        <>
-          {post && post.length > 0 && post.map(post => (
-            <form className={clsx(className, styles.form)} key={post.id}> {/*vsc zada elementu nadrzednego, i gdzies trzeba wrzucic key*/}
-              <TextField
-                required
-                id="standard-required"
-                label="Title"
-                variant="filled"
-                margin="normal"
-                value={post.title}
-              />
-              <TextField
-                required
-                id="standard-multiline-static"
-                label="Text"
-                multiline
-                rows={5}
-                variant="filled"
-                margin="normal"
-                value={post.text}
-              />
-              <TextField 
-                required
-                id="standard-required"
-                label="E-mail"
-                variant="filled"
-                margin="normal"
-                value={post.email}
-              />
-              <span>dodawacz zdjęcia</span>
-              <TextField 
-                id="standard"
-                label="Price"
-                variant="filled"
-                margin="normal"
-                value={post.price}
-              />
-              <TextField 
-                id="standard-number"
-                label="Phone number"
-                variant="filled"
-                margin="normal"
-                value={post.phone}
-              />
-              <TextField 
-                id="standard"
-                label="Location"
-                variant="filled"
-                margin="normal"
-                value={post.location}
-              />
-              <Button variant="contained" color="primary" className={clsx(className, styles.btn)}>Edit post</Button> {/*to powinien byc submit*/}
-            </form>
-          ))}
-        </>
+        <form className={clsx(className, styles.form)} key={post.id}> {/*vsc zada elementu nadrzednego, i gdzies trzeba wrzucic key*/}
+          <TextField
+            required
+            id="standard-required"
+            label="Title"
+            variant="filled"
+            margin="normal"
+            value={post.title}
+          />
+          <TextField
+            required
+            id="standard-multiline-static"
+            label="Text"
+            multiline
+            rows={5}
+            variant="filled"
+            margin="normal"
+            value={post.text}
+          />
+          <TextField 
+            required
+            id="standard-required"
+            label="E-mail"
+            variant="filled"
+            margin="normal"
+            value={post.email}
+          />
+          <span>dodawacz zdjęcia</span>
+          <TextField 
+            id="standard"
+            label="Price"
+            variant="filled"
+            margin="normal"
+            value={post.price}
+          />
+          <TextField 
+            id="standard-number"
+            label="Phone number"
+            variant="filled"
+            margin="normal"
+            value={post.phone}
+          />
+          <TextField 
+            id="standard"
+            label="Location"
+            variant="filled"
+            margin="normal"
+            value={post.location}
+          />
+          <Button variant="contained" color="primary" className={clsx(className, styles.btn)}>Edit post</Button> {/*to powinien byc submit*/}
+        </form>
         :
         <NotFound />
       }
@@ -85,7 +81,7 @@ const Component = ({className, post, users}) => (
 Component.propTypes = {
   className: PropTypes.string,
   users: PropTypes.object,
-  post: PropTypes.array,
+  post: PropTypes.object,
 };
 
 const mapStateToProps = (state, props) => {
