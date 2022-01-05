@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useEffect } from 'react';
 
 import clsx from 'clsx';
 
@@ -21,8 +22,10 @@ import { getOne, fetchById } from '../../../redux/postsRedux.js';
 
 
 const Component = ({className, post, users, fetchOnePost}) => {
-  fetchOnePost();
-  
+  useEffect(() => {
+    fetchOnePost();
+  }, [fetchOnePost]);
+
   return (
     <div className={clsx(className, styles.root)}>
       <Box className={clsx(className, styles.box)}>
