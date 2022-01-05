@@ -45,9 +45,10 @@ export const initialState = {
       active: false,
       error: false,
     },
+    post: {},
   },
   users: {
-    email: 'johndoe@example.com',
+    email: 'user123@example.com',
     type: 'user',
     logged: true,
   },

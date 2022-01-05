@@ -20,7 +20,7 @@ import { NotFound } from '../NotFound/NotFound';
 const Component = ({className, post, users}) => (
   <div className={clsx(className, styles.root)}>
     <Box className={clsx(className, styles.box)}>
-      {users.logged && users.email === post.email ?
+      {users.logged && users.email === post.author ?
         <form className={clsx(className, styles.form)} key={post.id}> {/*vsc zada elementu nadrzednego, i gdzies trzeba wrzucic key*/}
           <TextField
             required
@@ -46,7 +46,7 @@ const Component = ({className, post, users}) => (
             label="E-mail"
             variant="filled"
             margin="normal"
-            value={post.email}
+            value={post.author}
           />
           <ImageUploader
             withIcon={true}

@@ -2,7 +2,8 @@ import Axios from 'axios';
 
 /* selectors */
 export const getAll = ({posts}) => posts.data;
-export const getOne = ({posts}, id) => posts.data.find(post => post.id === id );
+// export const getOne = ({posts}, id) => posts.data.find(post => post.id === id );
+export const getOne = ({posts}) => posts.post;
 
 /* action name creator */
 const reducerName = 'posts';
