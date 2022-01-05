@@ -4,7 +4,7 @@ import { HomepageComponent } from './Homepage';
 
 describe('Component Homepage', () => {
   it('should render without crashing', () => {
-    const component = shallow(<HomepageComponent users={{}} />);
+    const component = shallow(<HomepageComponent users={{}} fetchPublishedPosts={() => {}} />);
     expect(component).toBeTruthy();
   });
 });

@@ -31,10 +31,10 @@ const Component = ({className, users, posts, fetchPublishedPosts}) => {
           <></>
         }
         {posts && posts.length > 0 && posts.map(post => (
-          <Card key={post.id} className={clsx(className, styles.card)}>
+          <Card key={post._id} className={clsx(className, styles.card)}>
             <CardContent>
               <Typography variant="overline" gutterBottom>
-                {post.pubDate}
+                {post.created}
               </Typography>
               <Typography variant="h5" component="div" gutterBottom>
                 {post.title}
@@ -44,7 +44,7 @@ const Component = ({className, users, posts, fetchPublishedPosts}) => {
               </Typography>
             </CardContent>
             <CardActions>
-              <Button component={Link} color="primary" size="small" href={`post/${post.id}`}>Learn More</Button>
+              <Button component={Link} color="primary" size="small" href={`post/${post._id}`}>Learn More</Button>
             </CardActions>
           </Card>
         ))}

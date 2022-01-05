@@ -50,7 +50,22 @@ export const fetchById = (id) => {
     Axios
       .get(`http://localhost:8000/api/posts/${id}`)
       .then(res => {
-        dispatch(fetchSuccess(res.data));
+        dispatch(fetchOne(res.data));
+      })
+      .catch(err => {
+        dispatch(fetchError(err.message || true));
+      });
+  };
+};
+
+export const addPostRequest = (post) => {
+  return (dispatch, getState) => {
+    dispatch(fetchStarted());
+
+    Axios
+      .post('http://localhost:8000/api/posts/add', post)
+      .then(res => {
+        dispatch(addPost(res.data));
       })
       .catch(err => {
         dispatch(fetchError(err.message || true));

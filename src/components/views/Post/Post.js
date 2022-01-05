@@ -26,12 +26,12 @@ const Component = ({className, post, users, fetchOnePost}) => {
   return (
     <div className={clsx(className, styles.root)}>
       <Box className={clsx(className, styles.box)}>
-        <Card key={post.id} sx={{ maxWidth: 345 }}>
-          {post.image && 
+        <Card key={post._id} sx={{ maxWidth: 345 }}>
+          {post.photo && 
             <CardMedia
               component="img"
               height="250"
-              image={post.image}
+              image={post.photo}
             />
           }
           <CardContent>
@@ -45,16 +45,16 @@ const Component = ({className, post, users, fetchOnePost}) => {
               {post.price && `Price: ${post.price}`}
             </Typography>
             <Typography variant="body2" gutterBottom>
-              Contact: {post.email} {post.phone && ` | ${post.phone}`}<br />
+              Contact: {post.author} {post.phone && ` | ${post.phone}`}<br />
               {post.location && `Location: ${post.location}`}
             </Typography>
             <Typography variant="caption">
-              Added: {post.pubDate} {post.upDate && ` | ${post.upDate}`}
+              Added: {post.created} {post.updated && ` | ${post.updated}`}
             </Typography>
           </CardContent>
           <CardActions>
-            {users.logged === true && users.email === post.email || users.type === 'admin' ?
-              <Button component={Link} size="small" color="primary" href={`${post.id}/edit`}>Edit</Button>
+            {users.logged === true && users.email === post.author || users.type === 'admin' ?
+              <Button component={Link} size="small" color="primary" href={`${post._id}/edit`}>Edit</Button>
               :
               <></>
             }

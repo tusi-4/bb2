@@ -12,7 +12,7 @@ import { Button } from '@material-ui/core';
 
 import { connect } from 'react-redux';
 import { getAllUsers } from '../../../redux/usersRedux.js';
-//import { addPostRequest } from '../../../redux/postsRedux.js';
+import { addPostRequest } from '../../../redux/postsRedux.js';
 
 import { NotFound } from '../NotFound/NotFound';
 
@@ -21,13 +21,13 @@ import { NotFound } from '../NotFound/NotFound';
 class Component extends React.Component {
   state = {
     post: {
+      author: '',
+      created: '',
+      updated: '',
+      status: '',
       title: '',
       text: '',
-      pubDate: '',
-      upDate: '',
-      email: '',
-      status: '',
-      image: '',
+      photo: '',
       price: '',
       phone: '',
       location: '',
@@ -43,12 +43,12 @@ class Component extends React.Component {
 
   submitForm = async (e) => {
     const { post } = this.state;
-    //const { addPost } = this.props;
+    const { addPost } = this.props;
 
     e.preventDefault();
 
     if(post.title.length > 10 && post.text.length > 20 && post.email.includes('@')){
-      // await addPost(post);
+      await addPost(post);
       this.setState({
         post: {
           title: '',
@@ -101,11 +101,11 @@ class Component extends React.Component {
               <TextField 
                 required
                 id="standard-required"
-                label="E-mail"
+                label="Author"
                 variant="filled"
                 margin="normal"
-                value={post.email}
-                name="email"
+                value={post.author}
+                name="author"
                 onChange={updateTextField}
               />
               <ImageUploader
@@ -158,18 +158,18 @@ class Component extends React.Component {
 Component.propTypes = {
   className: PropTypes.string,
   users: PropTypes.object,
-  //addPost: PropTypes.func,
+  addPost: PropTypes.func,
 };
 
 const mapStateToProps = state => ({
   users: getAllUsers(state),
 });
 
-// const mapDispatchToProps = dispatch => ({
-//   addPost: (post) => dispatch(addPostRequest(post)),
-// });
+const mapDispatchToProps = dispatch => ({
+  addPost: (post) => dispatch(addPostRequest(post)),
+});
 
-const Container = connect(mapStateToProps/*, mapDispatchToProps*/)(Component);
+const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
 
 export {
   // Component as PostAdd,
