@@ -11,82 +11,164 @@ import { Button } from '@material-ui/core';
 
 import { connect } from 'react-redux';
 import { getAllUsers } from '../../../redux/usersRedux.js';
+import { addPostRequest } from '../../../redux/postsRedux.js';
 
 import { NotFound } from '../NotFound/NotFound';
 
 
 
-const Component = ({className, users}) => (
-  <div className={clsx(className, styles.root)}>
-    <Box className={clsx(className, styles.box)}>
-      {users.logged === true ?
-        <>
-          <TextField
-            required
-            id="standard-required"
-            label="Title"
-            variant="filled"
-            margin="normal"
-          />
-          <TextField
-            required
-            id="standard-multiline-static"
-            label="Text"
-            multiline
-            rows={5}
-            variant="filled"
-            margin="normal"
-          />
-          <TextField 
-            required
-            id="standard-required"
-            label="E-mail"
-            variant="filled"
-            margin="normal"
-          />
-          <span>dodawacz zdjęcia</span>
-          <TextField 
-            id="standard"
-            label="Price"
-            variant="filled"
-            margin="normal"
-          />
-          <TextField 
-            id="standard-number"
-            label="Phone number"
-            variant="filled"
-            margin="normal"
-          />
-          <TextField 
-            id="standard"
-            label="Location"
-            variant="filled"
-            margin="normal"
-          />
-          <Button variant="contained" color="primary" className={clsx(className, styles.btn)}>Add post</Button>
-        </>
-        :
-        <NotFound />
-      }
-    </Box>
-  </div>
-);
+class Component extends React.Component {
+  state = {
+    post: {
+      title: '',
+      text: '',
+      pubDate: '',
+      upDate: '',
+      email: '',
+      status: '',
+      image: '',
+      price: '',
+      phone: '',
+      location: '',
+    },
+  }
 
+  updateTextField = ({ target }) => {
+    const { post } = this.state;
+    const { value, name} = target;
+
+    this.setState({ post: {...post, [name]: value }});
+  }
+
+  submitForm = async (e) => {
+    const { post } = this.state;
+    const { addPost } = this.props;
+
+    e.preventDefault();
+
+    if(post.title.length > 10 && post.text.length > 20 && post.email.includes('@')){
+      await addPost(post);
+      this.setState({
+        post: {
+          title: '',
+          text: '',
+          pubDate: '',
+          upDate: '',
+          email: '',
+          status: '',
+          image: '',
+          price: '',
+          phone: '',
+          location: '',
+        },
+      });
+    }
+  }
+
+  render() {
+    const { updateTextField, submitForm } = this;
+    const { className, users } = this.props;
+    const { post } = this.state;
+
+    return (
+      <div className={clsx(className, styles.root)}>
+        <Box className={clsx(className, styles.box)}>
+          {users.logged === true ?
+            <form onSubmit={submitForm} className={clsx(className, styles.form)}>
+              <TextField
+                required
+                id="standard-required"
+                label="Title"
+                variant="filled"
+                margin="normal"
+                value={post.title}
+                name="title"
+                onChange={updateTextField}
+              />
+              <TextField
+                required
+                id="standard-multiline-static"
+                label="Text"
+                multiline
+                rows={5}
+                variant="filled"
+                margin="normal"
+                value={post.text}
+                name="text"
+                onChange={updateTextField}
+              />
+              <TextField 
+                required
+                id="standard-required"
+                label="E-mail"
+                variant="filled"
+                margin="normal"
+                value={post.email}
+                name="email"
+                onChange={updateTextField}
+              />
+              <input
+                label="Image"
+                value={post.image}
+                name="image"
+                onChange={updateTextField}
+                className={clsx(className, styles.picput)}
+              >
+              </input>
+              <Button className={clsx(className, styles.btn)} color="primary" variant="contained">I act like I upload pictures</Button>
+              <TextField 
+                id="standard"
+                label="Price"
+                variant="filled"
+                margin="normal"
+                value={post.price}
+                name="price"
+                onChange={updateTextField}
+              />
+              <TextField 
+                id="standard-number"
+                label="Phone number"
+                variant="filled"
+                margin="normal"
+                value={post.phone}
+                name="phone"
+                onChange={updateTextField}
+              />
+              <TextField 
+                id="standard"
+                label="Location"
+                variant="filled"
+                margin="normal"
+                value={post.location}
+                name="location"
+                onChange={updateTextField}
+              />
+              <Button type="submit" variant="contained" color="primary" className={clsx(className, styles.btn)}>Add post</Button>
+            </form>
+            :
+            <NotFound />
+          }
+        </Box>
+      </div>
+    );
+  }
+}
 
 Component.propTypes = {
   className: PropTypes.string,
   users: PropTypes.object,
+  addPost: PropTypes.func,
 };
 
 const mapStateToProps = state => ({
   users: getAllUsers(state),
 });
 
-// const mapDispatchToProps = dispatch => ({
-//   someAction: arg => dispatch(reduxActionCreator(arg)),
-// });
+const mapDispatchToProps = dispatch => ({
+  addPost: (post) => dispatch(addPostRequest(post)),
+});
 
-const Container = connect(mapStateToProps)(Component);
+const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
 
 export {
   // Component as PostAdd,
